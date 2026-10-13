@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#09070d">
+  <meta name="description" content="Garoto Saliente — perfil exclusivo para maiores de 18 anos.">
+  <title>Garoto Saliente | Clube Privê</title>
+
+  <style>
+    :root {
+      --bg: #09070d;
+      --panel: #14101b;
+      --purple: #d000ff;
+      --purple-light: #e879ff;
+      --text: #ffffff;
+      --muted: #b7afc5;
+      --border: #30233e;
+      --green: #16c76a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9,7,13,.96);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 21px;
+      letter-spacing: -.5px;
+    }
+
+    .logo span { color: var(--purple); }
+
+    .age {
+      color: var(--purple-light);
+      border: 1px solid var(--purple);
+      border-radius: 9px;
+      padding: 5px 10px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: min(1050px, 92%);
+      margin: auto;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 30px;
+      align-items: center;
+      padding: 35px 0;
+    }
+
+    .avatar {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      object-fit: cover;
+      background: linear-gradient(145deg, #351347, #17101f);
+      border: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      color: var(--purple-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 49px);
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+
+    h1 span { color: var(--purple); }
+
+    .online {
+      color: #47e69a;
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    .description { color: var(--muted); }
+
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 25px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: #e9e1f3;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .button:hover { transform: translateY(-1px); opacity: .92; }
+
+    .whatsapp {
+      background: var(--green);
+      color: #04190d;
+    }
+
+    .primary {
+      background: linear-gradient(100deg, #9900ce, #e000ff);
+      color: white;
+    }
+
+    section { padding: 20px 0 32px; }
+
+    .section-heading { margin-bottom: 18px; }
+
+    .section-heading h2 {
+      margin: 0 0 5px;
+      font-size: 25px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .media-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .preview {
+      min-height: 150px;
+      aspect-ratio: 4 / 4.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 40%, #57216c 0%, #21142d 42%, #100c16 100%);
+      position: relative;
+    }
+
+    .preview img, .preview video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview .lock {
+      font-size: 32px;
+      filter: drop-shadow(0 0 12px #d000ff);
+    }
+
+    .preview small {
+      display: block;
+      color: #ded0eb;
+      margin-top: 6px;
+    }
+
+    .media-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 13px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .media-label span:last-child { color: var(--purple-light); }
+
+    .panel {
+      background: linear-gradient(135deg, #17101f, #100d15);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 23px;
+      margin: 8px 0;
+    }
+
+    .panel h2 { margin-top: 0; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #291332;
+      border: 1px solid var(--purple);
+      color: var(--purple-light);
+      font-weight: bold;
+    }
+
+    .step p { color: var(--muted); font-size: 14px; }
+
+    .access-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #493454;
+      background: #09070d;
+      color: white;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--purple); }
+
+    .notice {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    #message {
+      margin-top: 12px;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 15px;
+      padding: 25px 0 35px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 650px) {
+      .profile {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding-top: 22px;
+      }
+
+      .avatar {
+        max-width: 360px;
+        margin: auto;
+        aspect-ratio: 5 / 4;
+      }
+
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: 1fr; gap: 8px; }
+      .step { display: grid; grid-template-columns: 44px 1fr; gap: 10px; }
+      .step p { grid-column: 2; margin-top: -14px; }
+      .access-form { flex-direction: column; }
+      .panel { padding: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="#" class="logo">CLUBE <span>PRIVÊ</span></a>
+    <span class="age">18+</span>
+  </header>
+
+  <main class="container">
+    <section class="profile">
+      <!-- Troque a URL da foto abaixo pela URL da sua imagem. -->
+      <img
+        class="avatar"
+        src="https://placehold.co/700x850/21142d/e879ff?text=Sua+Foto"
+        alt="Foto de perfil do criador"
+      >
+
+      <div>
+        <div class="eyebrow">Perfil exclusivo</div>
+        <h1>Garoto <span>Saliente</span></h1>
+        <div class="online">● Perfil do criador</div>
+        <p class="description">
+          Bem-vindo ao meu espaço exclusivo. Aqui você encontra
+          fotos, vídeos e novidades. Entre em contato para conhecer
+          as opções de acesso disponíveis.
+        </p>
+
+        <div class="facts">
+          <span class="chip">🔞 Maiores de 18 anos</span>
+          <span class="chip">📸 Fotos e vídeos</span>
+          <span class="chip">🔒 Acesso exclusivo</span>
+        </div>
+
+        <a id="whatsappTop" class="button whatsapp" href="#contato" target="_blank" rel="noopener noreferrer">
+          ☎ Negociar pelo WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>Conteúdo exclusivo</h2>
+        <p>Conheça as categorias disponíveis para acesso.</p>
+      </div>
+
+      <div class="gallery">
+        <article class="media-card">
+          <div class="preview">
+            <div><div class="lock">🔒</div><small>Fotos Exclusivas</small></div>
+          </div>
+          <div class="media-label"><span>📷 Fotos</span><span>Bloqueado</span></div>
+        </article>
+
+        <article class="media-card">
+          <div class="preview">
+            <div><div class="lock">🔒</div><small>Vídeos HD</small></div>
+          </div>
+          <div class="media-label"><span>▶ Vídeos</span><span>Bloqueado</span></div>
+        </article>
+
+        <article class="media-card">
+          <div class="preview">
+            <div><div class="lock">🔒</div><small>Conteúdo Especial</small></div>
+          </div>
+          <div class="media-label"><span>✨ Novidades</span><span>Bloqueado</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="panel">
+        <h2>Como ter acesso</h2>
+        <p class="description">Um processo simples, com confirmação manual.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>
+              <strong>Converse comigo</strong>
+              <p>Entre em contato pelo WhatsApp e conheça as opções.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>
+              <strong>Combine o pagamento</strong>
+              <p>O valor e a forma de pagamento serão combinados pelo WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div>
+              <strong>Receba as instruções</strong>
+              <p>Depois de combinar os detalhes, você recebe as orientações de acesso.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="contato">Quer conhecer as opções?</h3>
+        <p class="description">Digite seu nome para iniciar uma conversa pelo WhatsApp.</p>
+
+        <form id="accessForm" class="access-form">
+          <input
+            id="visitorName"
+            type="text"
+            placeholder="Seu nome"
+            maxlength="50"
+            autocomplete="name"
+            required
+          >
+          <button class="button primary" type="submit">Conversar pelo WhatsApp</button>
+        </form>
+
+        <p class="notice">
+          O valor e a forma de pagamento são combinados diretamente pelo WhatsApp.
+          Página destinada exclusivamente a maiores de 18 anos.
+        </p>
+        <p id="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="currentYear"></span> Clube Privê</span>
+      <span>Conteúdo destinado exclusivamente a maiores de 18 anos.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Substitua pelo número completo: código do país + DDD + número, sem espaços.
+    const whatsappNumber = "5583974003238";
+
+    const whatsappTop = document.getElementById("whatsappTop");
+    const accessForm = document.getElementById("accessForm");
+    const visitorName = document.getElementById("visitorName");
+    const message = document.getElementById("message");
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    function hasValidNumber() {
+      return /^\d{12,13}$/.test(whatsappNumber);
+    }
+
+    function whatsappUrl(text) {
+      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    }
+
+    if (hasValidNumber()) {
+      whatsappTop.href = whatsappUrl(
+        "Oi! Vim pelo seu perfil e gostaria de conhecer as opções de acesso."
+      );
+    } else {
+      whatsappTop.href = "#contato";
+      whatsappTop.removeAttribute("target");
+    }
+
+    accessForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!hasValidNumber()) {
+        message.textContent =
+          "O responsável pela página precisa configurar o número do WhatsApp.";
+        return;
+      }
+
+      const name = visitorName.value.trim();
+      const text =
+        `Oi! Meu nome é ${name}. Vim pelo seu perfil e gostaria de conhecer ` +
+        "as opções de acesso, valores e formas de pagamento.";
+
+      window.open(whatsappUrl(text), "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
